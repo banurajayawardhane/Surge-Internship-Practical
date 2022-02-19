@@ -33,6 +33,8 @@ The application will get oppend in the localhost port no: 3000
 
 ## Installed packages 
 
+No need to install these packages individualy
+
 
 ### `npm install react-router-dom@5.3.0`
 ### `npm i  bcryptjs config express express-validator jsonwebtoken mongoose uuid`
