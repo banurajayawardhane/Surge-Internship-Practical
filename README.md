@@ -31,5 +31,20 @@ Execute the following command on the terminal to run the application.
 
 The application will get oppend in the localhost port no: 3000
 
+## Installed packages 
+
+
+### `npm install react-router-dom@5.3.0`
+### `npm i  bcryptjs config express express-validator jsonwebtoken mongoose uuid`
+### `npm i -Dev concurrently nodemon`
+### `npm install moment`
+### `npm install react-redux`
+### `npm install redux-thunk`
+### `npm install redux-devtools-extension`
+### `npm install react-moment`
+### `npm install axios`
+### `npm install sweetalert`
+
+
 
 
