@@ -22,6 +22,8 @@ the installation of the needed packages will get completed after the execution o
 
 ## Starting the application 
 
+Go back to the root folder 
+
 To run the application on the local mechine, the mechine should be connected to the internet in order to get connected with the MongoDB database.
 Execute the following command on the terminal to run the application. 
 
