@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { logout, userupdate } from "../../actions/auth";
+import swal from 'sweetalert';
 
 const Home = ({
   auth: { isAuthenticated, loading, user },
@@ -13,10 +14,10 @@ const Home = ({
     name: user.name,
     email: user.email,
     confirmPass: "",
-    new_password: "",
+    newpass: "",
   });
 
-  const { name, email, confirmPass, new_password } = updateData;
+  const { name, email, confirmPass, new_password, newpass } = updateData;
 
   const onChange = (e) => {
     setUpdateData({ ...updateData, [e.target.name]: e.target.value });
@@ -30,42 +31,32 @@ const Home = ({
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(email);
-    console.log(confirmPass);
-    console.log(name);
-    userupdate(name, email, confirmPass);
+    if(newpass==confirmPass){
+      userupdate(name, email, confirmPass);
+      swal("Success", "Updated successfully", "success");
+      console.log("Updated success")
+    }else{
+      swal ( "Oops" ,  "Confirm Password dose not match" ,  "error" )
+      console.log("Password dose not match")
+    }
   };
-
-  // // Redirect if logged in
-  // if (isAuthenticated) {
-  //   return <Redirect to='/home' />;
-  // }
 
   return (
     <div className='container'>
       <div className='app-wrapper'>
         <div>
           <center>
-            <h3 className='topic'>Welcome! {user.name}</h3>
-            <h3 className='topic'>Welcome! {user._id}</h3>
+            <h2 className='topic'>Welcome Back!</h2>
+            <h3 className="topic">{user.name}</h3>
           </center>
         </div>
         <div>
-          <h2 className='title'>SHOW Details</h2>
+          <h2 className='title'>Profile Details</h2>
         </div>
-        {/* <div className='title-small'>
-          <label className='lable'>Name</label>
-          <input className='input' type='text' name='name' value={user.name} />
+        <div>
+          <h3 className="topic">Full Name: {user.name}</h3><br />
+          <h3 className="topic">Email: {user.email}</h3>
         </div>
-        <div className='title-small'>
-          <label className='lable'>Email</label>
-          <input
-            className='input'
-            type='text'
-            name='email'
-            value={user.email}
-          />
-        </div> */}
       </div>
 
       <div className='app-wrapper'>
@@ -74,8 +65,9 @@ const Home = ({
         </div>
         <form onSubmit={(e) => onSubmit(e)}>
           <div className='title-small'>
-            <label className='lable'>name</label>
+            <label className='lable'>Name</label>
             <input
+              required
               className='input'
               type='text'
               name='name'
@@ -83,9 +75,23 @@ const Home = ({
               onChange={(e) => onChange(e)}
             />
           </div>
+
+          <div className='title-small'>
+            <label className='lable'>New password</label>
+            <input
+              required
+              className='input'
+              type='password'
+              name='newpass'
+              value={newpass}
+              onChange={(e) => onChange(e)}
+            />
+          </div>
+
           <div className='title-small'>
             <label className='lable'>Confirm New Password</label>
             <input
+              required
               className='input'
               type='password'
               name='confirmPass'
@@ -95,12 +101,10 @@ const Home = ({
             <input
               type='hidden'
               name='email'
-              value={email}
-              // onChange={(e) => onChange(e)}
             />
           </div>
           <div>
-            <input className='submit' type='submit' value='Change password' />
+            <input className='submit' type='submit' value='Update Details' />
           </div>
         </form>
       </div>
